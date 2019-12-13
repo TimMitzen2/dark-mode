@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 import Charts from "./components/Charts";
 import Navbar from "./components/Navbar";
-
+import Coins from './components/Coins'
 import "./styles.scss";
-
 const App = () => {
   const [coinData, setCoinData] = useState([]);
-
   useEffect(() => {
     axios
       .get(
@@ -21,10 +19,13 @@ const App = () => {
   return (
     <div className="App">
       <Navbar />
+      <Route path='/coin' component={Coins}/>
       <Charts coinData={coinData} />
+      
+    
+      
     </div>
   );
 };
-
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<Router><App /></Router>, rootElement);
